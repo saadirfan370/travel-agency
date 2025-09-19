@@ -16,7 +16,7 @@ const NavItems = ({ handleClick }: { handleClick?: () => void }) => {
         <img src="/assets/icons/logo.svg" alt="logo" className="size-[30px]" />
         <h1>Tourvisto</h1>
       </Link>
-
+      {/* <div className="border border-gray-100" /> */}
       <div className="container">
         <nav>
           {sidebarItems.map(({ id, href, icon, label }) => (

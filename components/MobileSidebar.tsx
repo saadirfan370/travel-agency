@@ -1,14 +1,23 @@
 // @ts-nocheck
 import { SidebarComponent } from "@syncfusion/ej2-react-navigations";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router";
 import NavItems from "./NavItems";
 
 const MobileSidebar = () => {
-  let sidebar: SidebarComponent;
+  let sidebarRef = useRef<SidebarComponent>();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    sidebar.toggle();
+  const toggleSidebar = (e) => {
+    if (!sidebarRef.current) return;
+
+    if (isOpen) {
+      sidebarRef.current.hide();
+      setIsOpen(false);
+    } else {
+      sidebarRef.current.show();
+      setIsOpen(true);
+    }
   };
 
   return (
@@ -30,8 +39,8 @@ const MobileSidebar = () => {
 
       <SidebarComponent
         width={270}
-        ref={(Sidebar) => (Sidebar = sidebar)}
-        created={() => sidebar.hide()}
+        ref={sidebarRef}
+        created={() => sidebarRef.current?.hide()}
         closeOnDocumentClick={true}
         showBackdrop={true}
         type="over"

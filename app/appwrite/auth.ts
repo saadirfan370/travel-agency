@@ -22,6 +22,8 @@ export const getUser = async () => {
         Query.select(["name", "email", "imageUrl", "joinedAt", "accountId"]),
       ]
     );
+    if (documents.length === 0) return null;
+    return documents[0];
   } catch (error) {
     console.log(error, "Login Error");
   }
@@ -108,7 +110,7 @@ export const storeUserData = async () => {
   }
 };
 
-export const getExistingUser = async () => {
+export const getExistingUser = async ($id: string) => {
   try {
     const user = await account.get();
     if (!user) return null;

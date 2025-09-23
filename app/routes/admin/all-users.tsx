@@ -7,16 +7,16 @@ import {
 import { cn } from "~/lib/utils";
 import { getAllUsers } from "~/appwrite/auth";
 import type { Route } from "./+types/dashboard";
+import { formatDate } from "~/lib/utils";
 
 export const loader = async () => {
-  console.log('chala')
+  console.log("chala");
   const { users, total } = await getAllUsers(10, 0);
   return { users, total };
 };
 
 const AllUsers = ({ loaderData }: Route.ComponentProps) => {
   const { users } = loaderData;
-  console.log(users,'hgefhwevfh')
   return (
     <main className="all-users wrapper">
       <Header
@@ -50,15 +50,18 @@ const AllUsers = ({ loaderData }: Route.ComponentProps) => {
           <ColumnDirective
             field="joinedAt"
             headerText="Date Joined"
-            width={120}
+            width={140}
             textAlign="Left"
+            template={({ joinedAt }: { joinedAt: string }) =>
+              formatDate(joinedAt)
+            }
           />
-          <ColumnDirective
+          {/* <ColumnDirective
             field="itineraryCreated"
             headerText="Trip Created"
             width={130}
             textAlign="Left"
-          />
+          /> */}
           <ColumnDirective
             field="status"
             headerText="Type"

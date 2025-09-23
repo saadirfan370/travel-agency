@@ -1,9 +1,12 @@
 import * as Sentry from "@sentry/react-router";
 //  profiling
 import { nodeProfilingIntegration } from "@sentry/profiling-node";
+import 'dotenv/config';
+
+const dsn = process.env.VITE_SENTRY_DNS || import.meta?.env?.VITE_SENTRY_DNS || "";
 //  profiling
 Sentry.init({
-  dsn: import.meta.env.VITE_SENTRY_DNS,
+  dsn: dsn,
   // Adds request headers and IP for users, for more info visit:
   sendDefaultPii: true,
   //  logs

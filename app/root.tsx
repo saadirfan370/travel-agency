@@ -6,9 +6,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
 import type { Route } from "./+types/root";
 import "./app.css";
+import * as Sentry from "@sentry/react-router";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,7 +25,7 @@ export const links: Route.LinksFunction = () => [
 
 import { registerLicense } from "@syncfusion/ej2-base";
 
-registerLicense(import.meta.env.VITE_SYNCFUSION_LICENSE_KEY)
+registerLicense(import.meta.env.VITE_SYNCFUSION_LICENSE_KEY);
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -63,6 +63,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
     stack = error.stack;
+    Sentry.captureException(error);
   }
 
   return (

@@ -10,7 +10,6 @@ import type { Route } from "./+types/dashboard";
 import { formatDate } from "~/lib/utils";
 
 export const loader = async () => {
-  console.log("chala");
   const { users, total } = await getAllUsers(10, 0);
   return { users, total };
 };
@@ -36,6 +35,7 @@ const AllUsers = ({ loaderData }: Route.ComponentProps) => {
                   src={props.imageUrl}
                   alt="user"
                   className="rounded-full size-8 aspect-square"
+                  referrerPolicy='no-referrer'
                 />
                 <span>{props.name}</span>
               </div>

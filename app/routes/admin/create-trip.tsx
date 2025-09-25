@@ -67,6 +67,15 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
       setLoading(false);
       return;
     }
+
+    try {
+      console.log("user", user);
+      console.log("formData", formData);
+    } catch (e) {
+      console.error("Error generating trip", e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (key: keyof TripFormData, value: string | number) => {
